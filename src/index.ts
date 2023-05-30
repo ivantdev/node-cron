@@ -1,5 +1,6 @@
 const cron = require('node-cron');
 const dotenv = require('dotenv');
+const node_fetch = require('node-fetch');
 
 dotenv.config();
 
@@ -13,12 +14,12 @@ cron.schedule(fetchInterval, async () => {
   
   while (status !== 200 && max_attempts > 0) {
     try {
-      const response = await fetch(process.env.API_URL as string);
+      const response = await node_fetch(process.env.API_URL as string);
       status = response.status;
       console.log(`status: ${status}`);
     } catch (error) {
       console.log(`error: ${error}`);
-      max_attempts = max_attempts -1;
+      max_attempts = max_attempts - 1;
     }
   }
   
