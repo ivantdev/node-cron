@@ -24,8 +24,8 @@ cron.schedule(fetchInterval, async () => {
   }
   
   if (max_attempts === 0 && status !== 200) {
-    console.log(`max attempts reached, please check your API`);
+    console.log(`max attempts reached, please check your API on ${process.env.API_URL}`);
   } else {
-    console.log(`task completed with ${max_attempts} attempts left`);
+    console.log(`status ${status}: ${process.env.API_URL} - task completed with ${max_attempts} attempts left`);
   }
 });
